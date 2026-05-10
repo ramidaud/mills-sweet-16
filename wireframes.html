@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery Design Options — Wireframes</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f1ea;
+  --paper: #fdfaf4;
+  --ink: #2a2522;
+  --muted: #7a6f63;
+  --accent: #b8884a;
+  --accent-deep: #8a6233;
+  --line: rgba(42,37,34,0.12);
+
+  --a-hot: #ff3c6f;
+  --a-hot-soft: #fff0f4;
+  --b-violet: #6c47ff;
+  --b-violet-soft: #f3f0ff;
+  --c-sage: #3a6b4a;
+  --c-sage-soft: #f0f5f1;
+}
+
+body {
+  background: #e8e4dc;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  padding: 48px 24px 120px;
+}
+
+/* ─── SELECTOR ─── */
+.selector {
+  max-width: 1200px;
+  margin: 0 auto 64px;
+  text-align: center;
+}
+
+.selector h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.25rem;
+  margin-bottom: 8px;
+}
+
+.selector p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+
+.tabs {
+  display: inline-flex;
+  background: rgba(42,37,34,0.08);
+  border-radius: 100px;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 48px;
+}
+
+.tab {
+  padding: 10px 24px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: all 0.25s;
+}
+
+.tab.active { background: white; color: var(--ink); box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+
+/* ─── DEVICE FRAME ─── */
+.scene {
+  display: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.scene.active { display: block; }
+
+.scene-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.devices {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 32px;
+  align-items: start;
+}
+
+/* desktop frame */
+.desktop-frame {
+  background: #1a1714;
+  border-radius: 12px;
+  padding: 32px 32px 24px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+  position: relative;
+}
+
+.desktop-frame::before {
+  content: '● ● ●';
+  font-size: 9px;
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.25);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.desktop-screen {
+  background: var(--bg);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 580px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.desktop-screen::-webkit-scrollbar { display: none; }
+
+/* phone frame */
+.phone-frame {
+  background: #1a1714;
+  border-radius: 48px;
+  padding: 20px 16px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+  position: relative;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.phone-frame::before {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 6px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 100px;
+  margin: 0 auto 14px;
+}
+
+.phone-screen {
+  background: var(--bg);
+  border-radius: 32px;
+  overflow: hidden;
+  height: 560px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.phone-screen::-webkit-scrollbar { display: none; }
+
+/* ─── CALLOUT PANEL ─── */
+.callout {
+  margin-top: 32px;
+  background: white;
+  border-radius: 12px;
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  border: 1px solid var(--line);
+}
+
+.callout-item h4 {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.callout-item p {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+/* ════════════════════════════════════════════
+   OPTION A — "The Drop"
+   Hot pink / champagne. Masonry grid.
+   Staggered entrance, cross-fade lightbox.
+════════════════════════════════════════════ */
+
+/* shared placeholder image blocks */
+.img { background: linear-gradient(135deg, #d9cfc4 0%, #c4b8a8 100%); }
+.img-warm { background: linear-gradient(135deg, #e0c9b0 0%, #c8a882 100%); }
+.img-cool { background: linear-gradient(135deg, #c8cdd6 0%, #a8b0bc 100%); }
+
+/* ── A Desktop ── */
+.a-desktop header {
+  background: #fff;
+  border-bottom: 3px solid var(--a-hot);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.a-desktop .logo {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.a-desktop .tag {
+  background: var(--a-hot);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.06em;
+}
+
+.a-desktop .hero {
+  background: linear-gradient(160deg, #fff0f4 0%, #fdf8f5 100%);
+  padding: 48px 32px 40px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,60,111,0.15);
+}
+
+.a-desktop .hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--a-hot);
+  margin-bottom: 12px;
+}
+
+.a-desktop .hero h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.a-desktop .hero-date {
+  font-size: 13px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.a-desktop .masonry {
+  columns: 3;
+  column-gap: 8px;
+  padding: 20px 20px 40px;
+}
+
+.a-desktop .m-tile {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.a-desktop .m-tile:hover { transform: scale(1.02); }
+
+.a-desktop .m-tile .img,
+.a-desktop .m-tile .img-warm,
+.a-desktop .m-tile .img-cool { width: 100%; display: block; }
+
+.a-tile-tall { height: 180px; }
+.a-tile-med  { height: 130px; }
+.a-tile-short { height: 100px; }
+
+.a-desktop .m-tile .heart {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.9);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.a-desktop .m-tile:hover .heart { opacity: 1; }
+
+/* ── A Phone ── */
+.a-phone header {
+  background: white;
+  border-bottom: 3px solid var(--a-hot);
+  padding: 16px 16px 12px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.a-phone .logo {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.a-phone .hero {
+  background: linear-gradient(160deg, #fff0f4 0%, #fdf8f5 100%);
+  padding: 28px 16px 24px;
+  text-align: center;
+}
+
+.a-phone .hero-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--a-hot);
+  margin-bottom: 8px;
+}
+
+.a-phone .hero h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.75rem;
+  line-height: 1.05;
+  margin-bottom: 6px;
+}
+
+.a-phone .hero-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.a-phone .grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  padding: 8px 8px 32px;
+}
+
+.a-phone .p-tile { border-radius: 4px; overflow: hidden; }
+.a-tile-ph-tall { height: 160px; }
+.a-tile-ph-med  { height: 120px; }
+.a-phone .p-tile .img,
+.a-phone .p-tile .img-warm,
+.a-phone .p-tile .img-cool { width: 100%; height: 100%; object-fit: cover; }
+
+/* ════════════════════════════════════════════
+   OPTION B — "The Reel"
+   Full-bleed hero, horizontal filmstrip,
+   slide transitions, violet accent.
+════════════════════════════════════════════ */
+
+/* ── B Desktop ── */
+.b-desktop .hero-wrap {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+
+.b-desktop .hero-img {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #c4b0c8 0%, #a890b8 100%);
+  object-fit: cover;
+}
+
+.b-desktop .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,10,30,0.75) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 28px;
+}
+
+.b-desktop .hero-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 6px;
+}
+
+.b-desktop .hero h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2rem;
+  color: white;
+  line-height: 1.05;
+  margin-bottom: 4px;
+}
+
+.b-desktop .hero-date {
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.b-desktop .dot-nav {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding: 10px;
+  background: rgba(20,10,30,0.85);
+}
+
+.b-desktop .dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+.b-desktop .dot.on { background: var(--b-violet); width: 16px; border-radius: 100px; }
+
+.b-desktop .strip-label {
+  padding: 14px 20px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--b-violet);
+}
+
+.b-desktop .filmstrip {
+  display: flex;
+  gap: 8px;
+  padding: 0 20px 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.b-desktop .filmstrip::-webkit-scrollbar { display: none; }
+
+.b-desktop .film-tile {
+  flex: 0 0 140px;
+  height: 100px;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.b-desktop .film-tile:first-child { border-color: var(--b-violet); }
+.b-desktop .film-tile:hover { transform: translateY(-2px); }
+
+.b-desktop .film-tile .img,
+.b-desktop .film-tile .img-warm,
+.b-desktop .film-tile .img-cool { width: 100%; height: 100%; object-fit: cover; }
+
+.b-desktop .grid-label {
+  padding: 8px 20px 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.b-desktop .grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  padding: 0 20px 32px;
+}
+
+.b-desktop .g-tile { border-radius: 4px; overflow: hidden; }
+.b-tile-tall { height: 110px; }
+.b-tile-med  { height: 85px; }
+
+/* ── B Phone ── */
+.b-phone .hero-wrap {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.b-phone .hero-img {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #c4b0c8 0%, #a890b8 100%);
+}
+
+.b-phone .hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,10,30,0.8) 0%, transparent 55%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+.b-phone .hero h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.6rem;
+  color: white;
+  line-height: 1.05;
+  margin-bottom: 3px;
+}
+
+.b-phone .hero-date {
+  font-size: 10px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.b-phone .dot-nav {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  padding: 8px;
+  background: rgba(20,10,30,0.85);
+}
+
+.b-phone .dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.25); }
+.b-phone .dot.on { background: var(--b-violet); width: 12px; border-radius: 100px; }
+
+.b-phone .filmstrip {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.b-phone .filmstrip::-webkit-scrollbar { display: none; }
+
+.b-phone .film-tile {
+  flex: 0 0 80px;
+  height: 60px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.b-phone .film-tile:first-child { border-color: var(--b-violet); }
+
+.b-phone .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  padding: 8px 8px 32px;
+}
+
+.b-phone .g-tile { border-radius: 3px; overflow: hidden; height: 80px; }
+
+/* ════════════════════════════════════════════
+   OPTION C — "The Album"
+   Editorial luxury. Sage green accent.
+   Large cover-feature layout. Staggered scroll.
+════════════════════════════════════════════ */
+
+/* ── C Desktop ── */
+.c-desktop { background: var(--paper); }
+
+.c-desktop header {
+  padding: 52px 36px 44px;
+  border-bottom: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 24px;
+}
+
+.c-desktop .head-left .eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-sage);
+  margin-bottom: 10px;
+}
+
+.c-desktop .head-left h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.5rem;
+  line-height: 1.02;
+  color: var(--ink);
+}
+
+.c-desktop .head-right {
+  text-align: right;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.c-desktop .head-right strong {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-sage);
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.c-desktop .feature {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 8px;
+  padding: 16px 20px 8px;
+}
+
+.c-desktop .feat-main {
+  border-radius: 6px;
+  overflow: hidden;
+  height: 220px;
+  background: linear-gradient(140deg, #d4c9b8 0%, #b8a890 100%);
+  cursor: pointer;
+  position: relative;
+}
+
+.c-desktop .feat-main .caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 14px;
+  background: linear-gradient(to top, rgba(20,17,14,0.6) 0%, transparent 100%);
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.06em;
+}
+
+.c-desktop .feat-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.c-desktop .feat-sm {
+  flex: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.c-desktop .feat-sm .img,
+.c-desktop .feat-sm .img-warm { height: 100%; display: block; }
+
+.c-desktop .uniform-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  padding: 0 20px 32px;
+}
+
+.c-desktop .u-tile {
+  border-radius: 4px;
+  overflow: hidden;
+  height: 90px;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.c-desktop .u-tile:hover { transform: scale(1.04); }
+
+/* ── C Phone ── */
+.c-phone { background: var(--paper); }
+
+.c-phone header {
+  padding: 28px 16px 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.c-phone .eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--c-sage);
+  margin-bottom: 8px;
+}
+
+.c-phone h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.75rem;
+  color: var(--ink);
+  line-height: 1.02;
+  margin-bottom: 4px;
+}
+
+.c-phone .head-date {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.c-phone .feat-main {
+  height: 180px;
+  background: linear-gradient(140deg, #d4c9b8 0%, #b8a890 100%);
+  margin: 10px 10px 0;
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.c-phone .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 4px 10px 32px;
+}
+
+.c-phone .p-tile { border-radius: 3px; overflow: hidden; height: 80px; }
+.c-phone .p-tile .img,
+.c-phone .p-tile .img-warm,
+.c-phone .p-tile .img-cool { width: 100%; height: 100%; }
+
+/* ─── KEY ─── */
+.key-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.key-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.key-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+@media (max-width: 900px) {
+  .devices { grid-template-columns: 1fr; }
+  .callout { grid-template-columns: 1fr; gap: 12px; }
+  .phone-frame { width: 240px; }
+  .phone-screen { height: 480px; }
+}
+</style>
+</head>
+<body>
+
+<div class="selector">
+  <h1>Gallery Design Options</h1>
+  <p>Mills Family Sweet 16 &middot; Three directions. Click to compare.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="show('a')">A &mdash; The Drop</button>
+    <button class="tab" onclick="show('b')">B &mdash; The Reel</button>
+    <button class="tab" onclick="show('c')">C &mdash; The Album</button>
+  </div>
+</div>
+
+<!-- ═══════════════ OPTION A ═══════════════ -->
+<div class="scene active" id="scene-a">
+  <div style="max-width:1200px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="scene-label">
+        <span class="badge" style="background:var(--a-hot-soft);color:var(--a-hot)">Option A</span>
+        The Drop &mdash; Masonry grid, hot accent, staggered entrance
+      </div>
+      <div class="key-row">
+        <span class="key-pill"><span class="key-dot" style="background:var(--a-hot)"></span> Hot pink on cream</span>
+        <span class="key-pill">✦ Masonry grid, varied heights</span>
+        <span class="key-pill">✦ Staggered fade-in on scroll</span>
+        <span class="key-pill">✦ Cross-fade lightbox</span>
+        <span class="key-pill">✦ 2-col on mobile</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="devices">
+    <!-- Desktop A -->
+    <div class="desktop-frame">
+      <div class="desktop-screen a-desktop">
+        <header>
+          <span class="logo">Mills Family Sweet 16</span>
+          <span class="tag">PRIVATE GALLERY</span>
+        </header>
+        <div class="hero">
+          <div class="hero-eyebrow">Photographs by Rami Daud</div>
+          <h1>Mills Family<br>Sweet 16</h1>
+          <div class="hero-date">May 2026</div>
+        </div>
+        <div class="masonry">
+          <div class="m-tile"><div class="img a-tile-tall"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-warm a-tile-med"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-cool a-tile-short"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-warm a-tile-short"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img a-tile-tall"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-cool a-tile-med"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-cool a-tile-med"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img a-tile-short"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-warm a-tile-tall"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img a-tile-med"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-cool a-tile-tall"></div><div class="heart">♡</div></div>
+          <div class="m-tile"><div class="img-warm a-tile-short"></div><div class="heart">♡</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone A -->
+    <div class="phone-frame">
+      <div class="phone-screen a-phone">
+        <header>
+          <div class="logo">Mills Sweet 16</div>
+        </header>
+        <div class="hero">
+          <div class="hero-eyebrow">Photographs by Rami Daud</div>
+          <h1>Mills Family<br>Sweet 16</h1>
+          <div class="hero-date">May 2026</div>
+        </div>
+        <div class="grid">
+          <div class="p-tile"><div class="img a-tile-ph-tall"></div></div>
+          <div class="p-tile"><div class="img-warm a-tile-ph-med"></div></div>
+          <div class="p-tile"><div class="img-cool a-tile-ph-med"></div></div>
+          <div class="p-tile"><div class="img-warm a-tile-ph-tall"></div></div>
+          <div class="p-tile"><div class="img a-tile-ph-med"></div></div>
+          <div class="p-tile"><div class="img-cool a-tile-ph-tall"></div></div>
+          <div class="p-tile"><div class="img-warm a-tile-ph-med"></div></div>
+          <div class="p-tile"><div class="img a-tile-ph-tall"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="max-width:1200px;margin:24px auto 0">
+    <div class="callout-item">
+      <h4>Vibe</h4>
+      <p>Instagram drop meets luxury brand. Energy that teens recognize instantly, but editorial enough for parents. The hot pink reads bold without being garish on a cream background.</p>
+    </div>
+    <div class="callout-item">
+      <h4>Motion</h4>
+      <p>Tiles stagger in as you scroll (0.05s delay per tile). Hover scales to 1.02. Lightbox cross-fades between images (300ms opacity swap). All CSS, zero JS overhead.</p>
+    </div>
+    <div class="callout-item">
+      <h4>Tradeoff</h4>
+      <p>Masonry grids can clip tall portrait images awkwardly. We'd set column heights intentionally. The hot pink accent may feel loud in two years &mdash; but it's on-brand for a 16th birthday <em>now</em>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ OPTION B ═══════════════ -->
+<div class="scene" id="scene-b">
+  <div style="max-width:1200px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="scene-label">
+        <span class="badge" style="background:var(--b-violet-soft);color:var(--b-violet)">Option B</span>
+        The Reel &mdash; Full-bleed hero, filmstrip nav, slide transitions
+      </div>
+      <div class="key-row">
+        <span class="key-pill"><span class="key-dot" style="background:var(--b-violet)"></span> Violet on dark</span>
+        <span class="key-pill">✦ Ken Burns hero image</span>
+        <span class="key-pill">✦ Horizontal filmstrip scrubber</span>
+        <span class="key-pill">✦ Swipe-left/right between images</span>
+        <span class="key-pill">✦ Stories-style dot indicator</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="devices">
+    <!-- Desktop B -->
+    <div class="desktop-frame">
+      <div class="desktop-screen b-desktop">
+        <div class="hero-wrap">
+          <div class="hero-img"></div>
+          <div class="hero-overlay">
+            <div class="hero-eyebrow">Photographs by Rami Daud</div>
+            <h1>Mills Family Sweet 16</h1>
+            <div class="hero-date">May 2026</div>
+          </div>
+        </div>
+        <div class="dot-nav">
+          <div class="dot on"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="strip-label">All Photos</div>
+        <div class="filmstrip">
+          <div class="film-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="film-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+        </div>
+        <div class="grid-label">Browse All</div>
+        <div class="grid">
+          <div class="g-tile"><div class="img b-tile-tall"></div></div>
+          <div class="g-tile"><div class="img-warm b-tile-med"></div></div>
+          <div class="g-tile"><div class="img-cool b-tile-tall"></div></div>
+          <div class="g-tile"><div class="img b-tile-med"></div></div>
+          <div class="g-tile"><div class="img-warm b-tile-tall"></div></div>
+          <div class="g-tile"><div class="img-cool b-tile-med"></div></div>
+          <div class="g-tile"><div class="img b-tile-tall"></div></div>
+          <div class="g-tile"><div class="img-warm b-tile-med"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone B -->
+    <div class="phone-frame">
+      <div class="phone-screen b-phone">
+        <div class="hero-wrap">
+          <div class="hero-img"></div>
+          <div class="hero-overlay">
+            <h1>Mills Family Sweet 16</h1>
+            <div class="hero-date">May 2026</div>
+          </div>
+        </div>
+        <div class="dot-nav">
+          <div class="dot on"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="filmstrip">
+          <div class="film-tile" style="flex:0 0 70px;height:52px"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="film-tile" style="flex:0 0 70px;height:52px"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="film-tile" style="flex:0 0 70px;height:52px"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="film-tile" style="flex:0 0 70px;height:52px"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="film-tile" style="flex:0 0 70px;height:52px"><div class="img-warm" style="height:100%;width:100%"></div></div>
+        </div>
+        <div class="grid">
+          <div class="g-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="g-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="g-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="g-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="g-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="g-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="max-width:1200px;margin:24px auto 0">
+    <div class="callout-item">
+      <h4>Vibe</h4>
+      <p>Apple Photos meets Instagram Stories. The hero image cycles (Ken Burns pan/zoom). The filmstrip lets you scrub through favorites fast. Teens will immediately recognize the pattern.</p>
+    </div>
+    <div class="callout-item">
+      <h4>Motion</h4>
+      <p>Hero: slow 8s pan + scale (CSS keyframe, looping). Dot indicator: slides between positions on tap. Filmstrip: CSS scroll-snap. Lightbox: directional slide-in (left goes left, right goes right).</p>
+    </div>
+    <div class="callout-item">
+      <h4>Tradeoff</h4>
+      <p>Most complex to build of the three. The auto-cycling hero needs one featured photo chosen intentionally &mdash; ideally you pick it, not randomized. Filmstrip on desktop feels slightly foreign; it's native on mobile.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ OPTION C ═══════════════ -->
+<div class="scene" id="scene-c">
+  <div style="max-width:1200px;margin:0 auto 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div class="scene-label">
+        <span class="badge" style="background:var(--c-sage-soft);color:var(--c-sage)">Option C</span>
+        The Album &mdash; Editorial feature layout, sage, refined scroll
+      </div>
+      <div class="key-row">
+        <span class="key-pill"><span class="key-dot" style="background:var(--c-sage)"></span> Sage green on cream</span>
+        <span class="key-pill">✦ Featured cover photo at top</span>
+        <span class="key-pill">✦ Uniform 5-col grid below</span>
+        <span class="key-pill">✦ Directional slide lightbox</span>
+        <span class="key-pill">✦ 3-col on mobile</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="devices">
+    <!-- Desktop C -->
+    <div class="desktop-frame">
+      <div class="desktop-screen c-desktop">
+        <header>
+          <div class="head-left">
+            <div class="eyebrow">Photographs by Rami Daud</div>
+            <h1>Mills Family<br>Sweet 16</h1>
+          </div>
+          <div class="head-right">
+            <strong>May 2026</strong>
+            Private delivery<br>ramidaud.com
+          </div>
+        </header>
+        <div class="feature">
+          <div class="feat-main">
+            <div class="caption">Tap to view full size &rarr;</div>
+          </div>
+          <div class="feat-side">
+            <div class="feat-sm"><div class="img-warm" style="height:106px;display:block"></div></div>
+            <div class="feat-sm"><div class="img-cool" style="height:106px;display:block"></div></div>
+          </div>
+        </div>
+        <div class="uniform-grid">
+          <div class="u-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="u-tile"><div class="img" style="height:100%;width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phone C -->
+    <div class="phone-frame">
+      <div class="phone-screen c-phone">
+        <header>
+          <div class="eyebrow">Photographs by Rami Daud</div>
+          <h1>Mills Family Sweet 16</h1>
+          <div class="head-date">May 2026</div>
+        </header>
+        <div class="feat-main"></div>
+        <div class="grid">
+          <div class="p-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img-warm" style="height:100%;width:100%"></div></div>
+          <div class="p-tile"><div class="img-cool" style="height:100%;width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="max-width:1200px;margin:24px auto 0">
+    <div class="callout-item">
+      <h4>Vibe</h4>
+      <p>High-end photography portfolio meets a private album drop. The feature layout makes it feel curated, not just dumped. Mothers will love the editorial quality. Teens will share individual photos from the lightbox.</p>
+    </div>
+    <div class="callout-item">
+      <h4>Motion</h4>
+      <p>Scroll: tiles fade up with stagger (IntersectionObserver, 60ms delay per row). Hover: scale 1.04 with shadow lift. Lightbox: slides left or right depending on direction, then snaps. All at 60fps on iPhone.</p>
+    </div>
+    <div class="callout-item">
+      <h4>Tradeoff</h4>
+      <p>Closest to current design &mdash; lowest rebuild cost. The feature section requires you to pick a hero shot. Sage is more timeless than hot pink, but less energetic. Best choice if this template will be reused for future shoots.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('scene-' + id).classList.add('active');
+  document.querySelectorAll('.tab')[{a:0,b:1,c:2}[id]].classList.add('active');
+}
+</script>
+
+</body>
+</html>
