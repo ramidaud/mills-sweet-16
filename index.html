@@ -695,16 +695,21 @@ function initDownloadAll() {
     if (btn.disabled) return;
     btn.disabled = true;
 
-    const zip   = new JSZip();
-    const total = state.photos.length;
+    const zip    = new JSZip();
+    const social = zip.folder('social');
+    const full   = zip.folder('full-resolution');
+    const total  = state.photos.length;
 
     for (let i = 0; i < total; i++) {
       const name = state.photos[i];
       btn.textContent = `Preparing… (${i + 1} / ${total})`;
       try {
-        const res  = await fetch('social/' + encodeURIComponent(name));
-        const blob = await res.blob();
-        zip.file(name, blob);
+        const [socialRes, fullRes] = await Promise.all([
+          fetch('social/' + encodeURIComponent(name)),
+          fetch('full/'   + encodeURIComponent(name)),
+        ]);
+        social.file(name, await socialRes.blob());
+        full.file(name,   await fullRes.blob());
       } catch (e) {
         console.warn('Could not fetch', name, e);
       }
@@ -715,7 +720,7 @@ function initDownloadAll() {
     const url     = URL.createObjectURL(content);
     const a       = document.createElement('a');
     a.href        = url;
-    a.download    = 'mills-sweet-16-social.zip';
+    a.download    = 'mills-sweet-16.zip';
     a.click();
     URL.revokeObjectURL(url);
 
